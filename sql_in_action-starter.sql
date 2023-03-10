@@ -61,10 +61,18 @@ SELECT id FROM final_airbnb WHERE room_type = "Private room" ORDER BY number_of_
 -- HINT: Look for which neighbourhood appears most frequently in the neighbourhood column
 -- HINT: You are creating "summary rows" for each neighbourhood, so you will just see one entry for each neighbourhood
 
+SELECT COUNT(neighbourhood) AS number_of_listings, neighbourhood FROM final_airbnb GROUP BY neighbourhood ORDER BY number_of_listings DESC LIMIT 1;
 
 -- EXPECTED OUTPUT: Williamsburg
 -- INVESTIGATE: Should Williamsburg be crowned the most popular neighbourhood?
+-- No, I think that popularity should be determined by frequently people are staying there. A potential query could look like this:
 
+SELECT neighbourhood, COUNT(neighbourhood), AVG(number_of_reviews/availability_365) AS booking_frequency FROM final_airbnb GROUP BY neighbourhood;
+
+-- This also shows Williamsburg is the most popular and deserves the crown!
+
+SELECT neighbourhood, AVG(availability_365), COUNT(neighbourhood) FROM final_airbnb WHERE neighbourhood = "Harlem" OR neighbourhood = "Williamsburg" GROUP BY neighbourhood;
+-- This query shows that Harlem has more days booked (less availability) than Williamsburg, even though they have the same number of listings. An argument could be made that Harlem is more popular.
 -- <<<<<<<<<<<<<<<<<<<<<< PROBLEM 9 >>>>>>>>>>>>>>>>>>>>>>>
 -- Query the data to discover which listing is the most popular using the reviews_per_month for all listings with a minimum_nights value of less than 7
 -- HINT: Sorting is still your friend! So are constraints.
