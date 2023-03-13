@@ -1,3 +1,8 @@
+# My comments from Exercise 11/Wrap Up
+
+Overall, I feel that the dataset provided needs a bit more information in order to get a fuller picture of what makes a successful airbnb. I'd like to see the value of the reviews (how many stars) and common themes in the reviews. Having these details would help identify more specific approaches that hosts could take to have a successful airbnb hosting business. With the data I had, it seems that keeping costs under $250 per night is ideal. Looking at listings that are less than $250 and are booked for at least 92% of the year, the top 10 by number of reviews, average 0.94 reviews per month, pointing to positive guest experiences and satisfaction.
+
+
 # SQL In Action - Data Analytics Flex
 
 Project problems and setup directions for the Week 6 Introduction to SQL project.
