@@ -78,7 +78,7 @@ SELECT neighbourhood, AVG(availability_365), COUNT(neighbourhood) FROM final_air
 -- HINT: Sorting is still your friend! So are constraints.
 
 -- EXPECTED OUTPUT: 58059
-
+SELECT id, reviews_per_month FROM final_airbnb WHERE minimum_nights < 7 ORDER BY reviews_per_month DESC LIMIT 1;
 
 -- <<<<<<<<<<<<<<<<<<<<<< PROBLEM 10 >>>>>>>>>>>>>>>>>>>>>>>
 -- Find out which host has the most listings. 
@@ -87,13 +87,16 @@ SELECT neighbourhood, AVG(availability_365), COUNT(neighbourhood) FROM final_air
 -- HINT: Work this one step at a time. See if you can find a way to just display the count of listings per host first.
 
 -- EXPECTED OUTPUT: The Box House Hotel with 6 listings
-
+SELECT COUNT(host_id) AS number_of_listings, host_name FROM final_airbnb GROUP BY host_name ORDER BY number_of_listings DESC LIMIT 1;
 
 -- <<<<<<<<<<<<<<<<<<<<<< PROBLEM 11 >>>>>>>>>>>>>>>>>>>>>>>
 -- <<<<<<<<<<<<<<<<<<<<<<< WRAP UP >>>>>>>>>>>>>>>>>>>>>>>>>
 -- What do you think makes a successful AirBnB rental in this market? What factors seem to be at play the most?
 -- Write a few sentences and include them with your project submission in the README file 
-
+SELECT * FROM final_airbnb WHERE availability_365 < 10 ORDER BY number_of_reviews DESC LIMIT 5;
+-- The output from line 96 shows that locations in Brooklyn are slightly more popular than other neighbourhood groups based on the number of reviews and having less availability (presumably because the locations are booked frequently). The price range is $75-100 for a private room and $80-$150 for the entire home/apt - price point may be a significant factor in popularity. Our top 5 were a mix of short and mid term rentals, so minimum stays don't appear to be a factor in popularity as guests may have different needs. More information is needed to determine the true nature of these top listings. I believe next steps for assessing what makes a successful airbnb in this market would be to look at common themes in reviews. Focusing on a single neighbourhood or growing the number of listings one has may not correspond with success.
+SELECT * FROM final_airbnb WHERE host_name = "The Box House Hotel";
+-- The information from line 98 shows the host with the most listings. While they are in a popular neighborhood group, their lowest cost room is $210 and only has 21 reviews and is only booked for about 60% of the year while the second lowest cost room at $250 does better in review numbers with 41 reviews, but is only booked for 45% of the year. The other listings fare worse in terms of time booked and number of reviews. Looking at this information confirms that price point is a factor in success while listing numbers may not indicate success. If someone is looking into airbnb hosting as a profitable business, I would recommend diversifying the locations and prices of listings as a building strategy.
 
 -- <<<<<<<<<<<<<<<<<<<<< ** BONUS ** >>>>>>>>>>>>>>>>>>>>>>>
 -- Find the the percent above or below each listing is compared to the average price for all listings.
